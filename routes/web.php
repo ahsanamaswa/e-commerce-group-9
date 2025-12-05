@@ -25,8 +25,8 @@ use App\Http\Controllers\Admin\StoreVerificationController;
 use App\Http\Controllers\Admin\UserManagementController;
 use App\Http\Controllers\Admin\StoreManagementController;
 
-
-Route::get('/', [HomeController::class, 'index'])->name('home');
+// Route::get('/', [HomeController::class, 'index'])->name('home');
+Route::view('/', 'pages.index')->name('home');
 Route::get('/search', [HomeController::class, 'search'])->name('search');
 Route::get('/categories', [HomeController::class, 'categories'])->name('categories');
 Route::get('/category/{slug}', [HomeController::class, 'category'])->name('category.show');
