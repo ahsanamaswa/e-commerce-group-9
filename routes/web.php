@@ -25,8 +25,8 @@ use App\Http\Controllers\Admin\StoreVerificationController;
 use App\Http\Controllers\Admin\UserManagementController;
 use App\Http\Controllers\Admin\StoreManagementController;
 
-// Route::get('/', [HomeController::class, 'index'])->name('home');
-Route::view('/', 'pages.index')->name('home');
+Route::get('/', [HomeController::class, 'index'])->name('home');
+// Route::view('/', 'pages.index')->name('home');
 Route::view('/marketplace', 'pages.marketplace')->name('marketplace');
 Route::view('/how-it-works', 'pages.how')->name('how-it-works');
 Route::view('/pricing', 'pages.pricing')->name('pricing');

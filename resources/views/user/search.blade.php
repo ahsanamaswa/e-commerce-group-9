@@ -1,74 +1,57 @@
 @extends('layouts.app')
 
-@section('title', 'Marketplace - Tumbloo')
+@section('title', 'Hasil Pencarian - Tumbloo')
 
 @section('content')
-<!-- Hero Section -->
-<div class="bg-gradient-to-br from-tumbloo-black via-tumbloo-dark to-tumbloo-black border-b border-tumbloo-accent">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-        <div class="text-center">
-            <h1 class="text-4xl md:text-5xl font-bold text-tumbloo-white mb-4">
-                Temukan Tumbler Berkualitas
-            </h1>
-            <p class="text-lg text-tumbloo-gray mb-8 max-w-2xl mx-auto">
-                Marketplace terpercaya untuk membeli dan menjual tumbler terbaik
-            </p>
-            
-            <!-- Search Bar -->
-            <form action="{{ route('search') }}" method="GET" class="max-w-2xl mx-auto">
-                <div class="flex gap-2">
-                    <input 
-                        type="text" 
-                        name="q" 
-                        value="{{ request('q') }}"
-                        placeholder="Cari tumbler..." 
-                        class="flex-1 px-6 py-4 bg-tumbloo-dark border border-tumbloo-accent rounded-lg text-tumbloo-white placeholder-tumbloo-gray focus:outline-none focus:ring-2 focus:ring-tumbloo-accent-light"
-                    >
-                    <button type="submit" class="px-8 py-4 bg-tumbloo-accent hover:bg-tumbloo-accent-light text-white font-semibold rounded-lg transition">
-                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
-                        </svg>
-                    </button>
-                </div>
-            </form>
-        </div>
-    </div>
-</div>
-
-<!-- Categories Filter -->
-<div class="bg-tumbloo-dark border-b border-tumbloo-accent">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
-        <div class="flex items-center gap-4 overflow-x-auto">
-            <a href="{{ route('home') }}" 
-               class="px-4 py-2 rounded-lg text-sm font-medium transition whitespace-nowrap {{ !request('category') ? 'bg-tumbloo-accent text-white' : 'bg-tumbloo-black text-tumbloo-gray hover:text-tumbloo-white' }}">
-                Semua Kategori
-            </a>
-            @foreach($categories as $category)
-                <a href="{{ route('home', ['category' => $category->id]) }}" 
-                   class="px-4 py-2 rounded-lg text-sm font-medium transition whitespace-nowrap {{ request('category') == $category->id ? 'bg-tumbloo-accent text-white' : 'bg-tumbloo-black text-tumbloo-gray hover:text-tumbloo-white' }}">
-                    {{ $category->name }}
-                </a>
-            @endforeach
-            <a href="{{ route('categories') }}" 
-               class="px-4 py-2 rounded-lg text-sm font-medium bg-tumbloo-black text-tumbloo-accent hover:text-tumbloo-accent-light transition whitespace-nowrap">
-                Lihat Semua →
-            </a>
-        </div>
-    </div>
-</div>
-
-<!-- Products Grid -->
 <div class="bg-tumbloo-dark min-h-screen py-12">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <!-- Search Header -->
+        <div class="mb-8">
+            <h1 class="text-3xl font-bold text-tumbloo-white mb-2">
+                Hasil Pencarian untuk "{{ $query }}"
+            </h1>
+            <p class="text-tumbloo-gray">Ditemukan {{ $products->total() }} produk</p>
+        </div>
+
+        <!-- Search Bar -->
+        <form action="{{ route('search') }}" method="GET" class="mb-8">
+            <div class="flex gap-2">
+                <input 
+                    type="text" 
+                    name="q" 
+                    value="{{ $query }}"
+                    placeholder="Cari tumbler..." 
+                    class="flex-1 px-6 py-4 bg-tumbloo-black border border-tumbloo-accent rounded-lg text-tumbloo-white placeholder-tumbloo-gray focus:outline-none focus:ring-2 focus:ring-tumbloo-accent-light"
+                >
+                <button type="submit" class="px-8 py-4 bg-tumbloo-accent hover:bg-tumbloo-accent-light text-white font-semibold rounded-lg transition">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+                    </svg>
+                </button>
+            </div>
+        </form>
+
         @if($products->isEmpty())
-            <div class="text-center py-16">
+            <div class="bg-tumbloo-black rounded-lg border border-tumbloo-accent p-12 text-center">
                 <svg class="w-24 h-24 mx-auto text-tumbloo-gray mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 13V6a2 2 0 00-2-2H6a2 2 0 00-2 2v7m16 0v5a2 2 0 01-2 2H6a2 2 0 01-2-2v-5m16 0h-2.586a1 1 0 00-.707.293l-2.414 2.414a1 1 0 01-.707.293h-3.172a1 1 0 01-.707-.293l-2.414-2.414A1 1 0 006.586 13H4"></path>
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
                 </svg>
-                <h3 class="text-xl font-semibold text-tumbloo-white mb-2">Produk Tidak Ditemukan</h3>
-                <p class="text-tumbloo-gray">Coba kata kunci atau kategori lain</p>
+                <h2 class="text-2xl font-bold text-tumbloo-white mb-2">Tidak Ada Hasil</h2>
+                <p class="text-tumbloo-gray mb-6">Tidak ditemukan produk untuk "{{ $query }}"</p>
+                <div class="space-y-2 text-sm text-tumbloo-gray mb-6">
+                    <p>Saran:</p>
+                    <ul class="list-disc list-inside">
+                        <li>Periksa ejaan kata kunci Anda</li>
+                        <li>Coba gunakan kata kunci yang lebih umum</li>
+                        <li>Coba gunakan kata kunci yang berbeda</li>
+                    </ul>
+                </div>
+                <a href="{{ route('home') }}" class="inline-block bg-tumbloo-accent hover:bg-tumbloo-accent-light text-white font-semibold py-3 px-6 rounded-lg transition">
+                    Kembali ke Beranda
+                </a>
             </div>
         @else
+            <!-- Products Grid -->
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
                 @foreach($products as $product)
                     <a href="{{ route('product.show', $product->id) }}" class="group">
@@ -88,9 +71,13 @@
                                 @endif
                                 
                                 <!-- Stock Badge -->
-                                @if($product->stock < 5)
+                                @if($product->stock < 5 && $product->stock > 0)
                                     <div class="absolute top-2 left-2 px-2 py-1 bg-red-500 text-white text-xs font-semibold rounded">
                                         Stok Terbatas
+                                    </div>
+                                @elseif($product->stock == 0)
+                                    <div class="absolute top-2 left-2 px-2 py-1 bg-gray-500 text-white text-xs font-semibold rounded">
+                                        Stok Habis
                                     </div>
                                 @endif
                             </div>
@@ -107,7 +94,13 @@
                                         <div class="text-tumbloo-accent font-bold text-lg">
                                             Rp {{ number_format($product->price, 0, ',', '.') }}
                                         </div>
-                                        <div class="text-xs text-tumbloo-gray">Stok: {{ $product->stock }}</div>
+                                        <div class="text-xs text-tumbloo-gray">
+                                            @if($product->stock > 0)
+                                                Stok: {{ $product->stock }}
+                                            @else
+                                                Habis
+                                            @endif
+                                        </div>
                                     </div>
                                     
                                     @if($product->reviews_count > 0)
@@ -127,7 +120,7 @@
 
             <!-- Pagination -->
             <div class="mt-12">
-                {{ $products->links() }}
+                {{ $products->appends(['q' => $query])->links() }}
             </div>
         @endif
     </div>
