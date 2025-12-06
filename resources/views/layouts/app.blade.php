@@ -6,7 +6,8 @@
     <title>@yield('title', 'Tumbloo - Platform Jual Beli Tumblr')</title>
     
     <!-- Tailwind CSS -->
-    <script src="https://cdn.tailwindcss.com"></script>
+    {{-- <script src="https://cdn.tailwindcss.com"></script> --}}
+    @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 <body class="flex flex-col min-h-screen bg-white font-sans antialiased">
     
