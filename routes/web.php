@@ -26,12 +26,13 @@ use App\Http\Controllers\Admin\UserManagementController;
 use App\Http\Controllers\Admin\StoreManagementController;
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
-// Route::view('/', 'pages.index')->name('home');
+Route::view('/', 'pages.index')->name('home');
 Route::view('/marketplace', 'pages.marketplace')->name('marketplace');
 Route::view('/how-it-works', 'pages.how')->name('how-it-works');
 Route::view('/pricing', 'pages.pricing')->name('pricing');
 Route::view('/sell', 'pages.sell')->name('sell');
-Route::view('/dashboard', 'pages.dashboard')->name('dashboard');
+// Route::view('/dashboard', 'pages.dashboard')->name('dashboard');
+Route::get('/dashboard', [HomeController::class, 'dashboard'])->name('dashboard');
 Route::view('/faq', 'pages.faq')->name('faq');
 Route::view('/support', 'pages.support')->name('support');
 Route::view('/guide', 'pages.guide')->name('guide');
