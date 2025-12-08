@@ -9,58 +9,101 @@ use App\Models\ProductCategory;
 
 class HomeController extends Controller
 {
-    public function index()
+    /**
+     * Dashboard - Halaman utama setelah login
+     */
+    public function dashboard(Request $request)
     {
-        // Jika user sudah login, tampilkan halaman user/home
-        if (auth()->check()) {
-            $products = Product::with(['store', 'category'])
-                ->where('status', 'available')
-                ->latest()
-                ->paginate(12);
-                
-            $categories = ProductCategory::withCount('products')->get();
-            
-            return view('user.home', compact('products', 'categories'));
-        }
-        
-        // Jika belum login, tampilkan landing page
-        return view('pages.index');
-    }
+        $query = Product::with(['store', 'images'])
+            ->withCount('reviews')
+            ->withAvg('reviews', 'rating')
+            ->where('stock', '>', 0); // Hanya produk yang ada stoknya
 
-        // TAMBAHKAN METHOD INI
-    public function dashboard()
-    {
-        $products = Product::with(['store', 'category'])
-            ->latest()
-            ->paginate(12);
-            
-        $categories = ProductCategory::withCount('products')->get();
-        
+        // Filter berdasarkan kategori jika ada
+        if ($request->has('category') && $request->category) {
+            $query->where('product_category_id', $request->category);
+        }
+
+        // Search jika ada
+        if ($request->has('q') && $request->q) {
+            $keyword = $request->q;
+            $query->where(function($q) use ($keyword) {
+                $q->where('name', 'LIKE', "%{$keyword}%")
+                  ->orWhere('description', 'LIKE', "%{$keyword}%");
+            });
+        }
+
+        $products = $query->latest('created_at')->paginate(12);
+        $categories = ProductCategory::all();
+
         return view('pages.dashboard', compact('products', 'categories'));
     }
-    public function search(Request $request)
+
+    /**
+     * Marketplace - Halaman kategori/brand tumbler
+     */
+    public function marketplace()
     {
-        $query = $request->input('q');
-        $products = Product::where('name', 'LIKE', "%{$query}%")
-            ->orWhere('description', 'LIKE', "%{$query}%")
-            ->paginate(12);
-            
-        return view('user.search', compact('products', 'query'));
+        // Ambil semua kategori dengan jumlah produk
+        $categories = ProductCategory::withCount('products')
+            ->orderBy('name')
+            ->get();
+
+        return view('pages.marketplace', compact('categories'));
     }
 
-    public function categories()
-    {
-        $categories = ProductCategory::withCount('products')->get();
-        return view('user.categories', compact('categories'));
-    }
-
+    /**
+     * Category Show - Tampilkan produk berdasarkan kategori
+     */
     public function category($slug)
     {
         $category = ProductCategory::where('slug', $slug)->firstOrFail();
-        $products = Product::where('category_id', $category->id)
-            ->where('status', 'available')
+        
+        $products = Product::where('product_category_id', $category->id)
+            ->with(['store', 'images'])
+            ->withCount('reviews')
+            ->withAvg('reviews', 'rating')
+            ->where('stock', '>', 0)
+            ->latest()
             ->paginate(12);
-            
-        return view('user.category', compact('category', 'products'));
+
+        $allCategories = ProductCategory::all();
+
+        return view('pages.category-products', compact('category', 'products', 'allCategories'));
+    }
+
+    /**
+     * Search - Pencarian produk
+     */
+    public function search(Request $request)
+    {
+        $keyword = $request->get('q');
+        
+        $products = Product::where(function($query) use ($keyword) {
+                $query->where('name', 'LIKE', "%{$keyword}%")
+                      ->orWhere('description', 'LIKE', "%{$keyword}%");
+            })
+            ->with(['store', 'images'])
+            ->withCount('reviews')
+            ->withAvg('reviews', 'rating')
+            ->where('stock', '>', 0)
+            ->latest()
+            ->paginate(12);
+
+        $categories = ProductCategory::all();
+
+        return view('pages.dashboard', compact('products', 'categories', 'keyword'));
+    }
+
+    /**
+     * Categories - Halaman semua kategori
+     */
+    public function categories()
+    {
+        $categories = ProductCategory::withCount('products')
+            ->orderBy('name')
+            ->get();
+
+        return view('pages.categories', compact('categories'));
     }
 }
