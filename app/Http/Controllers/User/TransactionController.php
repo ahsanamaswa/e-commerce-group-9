@@ -9,8 +9,17 @@ class TransactionController extends Controller
 {
     public function index()
     {
-        $transactions = Transaction::where('buyer_id', auth()->id())
-            ->with(['store', 'details.product'])
+        // Ambil buyer_id dari tabel buyers berdasarkan user yang login
+        $buyer = \App\Models\Buyer::where('user_id', auth()->id())->first();
+
+        if (!$buyer) {
+            return view('user.transaction.index', [
+                'transactions' => collect([])
+            ]);
+        }
+
+        $transactions = Transaction::where('buyer_id', $buyer->id)
+            ->with(['store', 'transactiondetails.product.images'])
             ->latest()
             ->paginate(10);
 

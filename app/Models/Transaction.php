@@ -32,21 +32,36 @@ class Transaction extends Model
         'grand_total' => 'decimal:2',
     ];
 
+    /**
+     * Relasi ke Buyer (User -> Buyer Profile)
+     * Kalau relasinya memang ke User, ini dibiarkan.
+     * Kalau harusnya ke model Buyer, tinggal ubah.
+     */
     public function buyer()
     {
-        return $this->belongsTo(User::class, 'buyer_id');
+        return $this->belongsTo(User::class, 'buyer_id', 'id');
     }
 
+    /**
+     * Relasi ke Store
+     */
     public function store()
     {
-        return $this->belongsTo(Store::class);
+        return $this->belongsTo(Store::class, 'store_id', 'id');
     }
 
-    public function details()
+    /**
+     * 🔥 Relasi ke TransactionDetail (PERBAIKAN WAJIB)
+     * Nama relasinya harus SAMA dengan yang kamu panggil di Controller: 'transactionDetails'
+     */
+    public function transactionDetails()
     {
-        return $this->hasMany(TransactionDetail::class);
+        return $this->hasMany(TransactionDetail::class, 'transaction_id', 'id');
     }
 
+    /**
+     * SCOPES untuk status transaksi
+     */
     public function scopePending($query)
     {
         return $query->where('payment_status', 'pending');

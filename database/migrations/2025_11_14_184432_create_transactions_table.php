@@ -26,7 +26,7 @@ return new class extends Migration
             $table->string('tracking_number')->nullable();
             $table->decimal('tax', 26, 2);
             $table->decimal('grand_total', 26, 2);
-            $table->enum('payment_status', ['unpaid', 'paid'])->default('unpaid');
+            $table->enum('payment_status', ['pending', 'unpaid', 'paid', 'failed', 'cancelled'])->default('pending');
             $table->timestamps();
         });
     }
