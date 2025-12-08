@@ -23,4 +23,12 @@ class ProductImage extends Model
     {
         return $this->belongsTo(Product::class);
     }
+
+    /**
+     * Get the full URL of the image
+     */
+    public function getImageUrlAttribute()
+    {
+        return asset('storage/' . $this->image);
+    }
 }

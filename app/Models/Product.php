@@ -14,7 +14,7 @@ class Product extends Model
         'product_category_id',
         'name',
         'slug',
-        'about',
+        'description',
         'condition',
         'price',
         'weight',
@@ -23,8 +23,13 @@ class Product extends Model
 
     protected $casts = [
         'price' => 'decimal:2',
-        'weight' => 'decimal:2',
+        'weight' => 'integer',
+        'stock' => 'integer',
     ];
+
+    // ============================================
+    // RELATIONSHIPS
+    // ============================================
 
     public function store()
     {
@@ -46,29 +51,146 @@ class Product extends Model
         return $this->hasMany(ProductReview::class);
     }
 
+    public function carts()
+    {
+        return $this->hasMany(Cart::class);
+    }
+
     public function transactionDetails()
     {
         return $this->hasMany(TransactionDetail::class);
     }
-    public function getAverageRatingAttribute()
+
+    /**
+     * Get the thumbnail image
+     */
+    public function thumbnail()
     {
-        return round($this->reviews()->avg('rating') ?? 0, 1);
+        return $this->hasOne(ProductImage::class)->where('is_thumbnail', 1);
     }
 
-    public function getTotalReviewsAttribute()
+    // ============================================
+    // ACCESSORS & HELPERS
+    // ============================================
+
+    /**
+     * Get the product image URL (thumbnail or first image)
+     * PENTING: Sesuaikan dengan lokasi penyimpanan gambar Anda
+     */
+    public function getImageUrlAttribute()
+    {
+        // Jika pakai Storage::disk('public')
+        // $thumbnail = $this->thumbnail;
+        // if ($thumbnail) {
+        //     return asset('storage/' . $thumbnail->image);
+        // }
+
+        // Jika pakai public/images/products (seperti kode sebelumnya)
+        $thumbnail = $this->thumbnail;
+        if ($thumbnail) {
+            return asset($thumbnail->image); // Karena sudah include 'images/products/'
+        }
+
+        $firstImage = $this->images()->first();
+        if ($firstImage) {
+            return asset($firstImage->image); // Sudah include path lengkap
+        }
+
+        return asset('images/placeholder.png');
+    }
+
+    /**
+     * Check if product is in stock
+     */
+    public function isInStock()
+    {
+        return $this->stock > 0;
+    }
+
+    /**
+     * Check if product is low stock (less than 5)
+     */
+    public function isLowStock()
+    {
+        return $this->stock > 0 && $this->stock < 5;
+    }
+
+    /**
+     * Get formatted price
+     */
+    public function getFormattedPriceAttribute()
+    {
+        return 'Rp ' . number_format($this->price, 0, ',', '.');
+    }
+
+    /**
+     * Get condition label in Indonesian
+     */
+    public function getConditionLabelAttribute()
+    {
+        return $this->condition === 'new' ? 'Baru' : 'Bekas';
+    }
+
+    /**
+     * Get condition badge class
+     */
+    public function getConditionBadgeClassAttribute()
+    {
+        return $this->condition === 'new' 
+            ? 'bg-green-500 bg-opacity-20 text-green-400' 
+            : 'bg-yellow-500 bg-opacity-20 text-yellow-400';
+    }
+
+    /**
+     * Get average rating
+     */
+    public function getAverageRatingAttribute()
+    {
+        return $this->reviews()->avg('rating') ?? 0;
+    }
+
+    /**
+     * Get total reviews count
+     */
+    public function getReviewsCountAttribute()
     {
         return $this->reviews()->count();
     }
 
-    public function getThumbnailAttribute()
+    // ============================================
+    // SCOPES
+    // ============================================
+
+    /**
+     * Scope untuk produk yang in stock
+     */
+    public function scopeInStock($query)
     {
-        $thumbnail = $this->images()->where('is_thumbnail', true)->first();
-        
-        if ($thumbnail) {
-            return $thumbnail->image;
-        }
-        
-        $firstImage = $this->images()->first();
-        return $firstImage ? $firstImage->image : 'products/default.jpg';
+        return $query->where('stock', '>', 0);
+    }
+
+    /**
+     * Scope untuk produk by category
+     */
+    public function scopeByCategory($query, $categoryId)
+    {
+        return $query->where('product_category_id', $categoryId);
+    }
+
+    /**
+     * Scope untuk produk by store
+     */
+    public function scopeByStore($query, $storeId)
+    {
+        return $query->where('store_id', $storeId);
+    }
+
+    /**
+     * Scope untuk search produk
+     */
+    public function scopeSearch($query, $keyword)
+    {
+        return $query->where('name', 'like', '%' . $keyword . '%')
+                     ->orWhere('description', 'like', '%' . $keyword . '%');
     }
 }

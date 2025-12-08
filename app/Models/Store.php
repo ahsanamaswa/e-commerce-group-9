@@ -16,14 +16,16 @@ class Store extends Model
         'about',
         'phone',
         'address_id',
-        'address',
         'city',
+        'address',
         'postal_code',
         'is_verified',
     ];
 
     protected $casts = [
         'is_verified' => 'boolean',
+        'created_at' => 'datetime',
+        'updated_at' => 'datetime',
     ];
 
     public function user()
@@ -36,23 +38,26 @@ class Store extends Model
         return $this->hasMany(Product::class);
     }
 
-    public function transactions()
-    {
-        return $this->hasMany(Transaction::class);
-    }
-
     public function balance()
     {
         return $this->hasOne(StoreBalance::class);
     }
 
-    public function balanceHistory()
+    public function scopeVerified($query)
     {
-        return $this->hasMany(StoreBalanceHistory::class, 'store_balance_id');
+        return $query->where('is_verified', true);
     }
 
-    public function withdrawals()
+    public function getLogoUrlAttribute()
     {
-        return $this->hasMany(Withdrawal::class);
+        if ($this->logo && file_exists(public_path($this->logo))) {
+            return asset($this->logo);
+        }
+        return asset('images/default-store-logo.png');
+    }
+
+    public static function hasStore($userId)
+    {
+        return self::where('user_id', $userId)->exists();
     }
 }
