@@ -4,15 +4,15 @@ namespace App\Http\Middleware;
 
 use Closure;
 use Illuminate\Http\Request;
-use Symfony\Component\HttpFoundation\Response;
 
-class EnsureUserIsCustomer
+class EnsureUserisCustomer
 {
-    public function handle(Request $request, Closure $next): Response
+    public function handle(Request $request, Closure $next)
     {
-        if (!auth()->check() || !auth()->user()->isCustomer()) {
-            abort(403, 'Access denied. Customer only.');
+        if (auth()->check() && auth()->user()->role === 'member') {
+            return $next($request);
         }
-        return $next($request);
+
+        abort(403, 'ACCESS DENIED. MEMBER ONLY.');
     }
 }
