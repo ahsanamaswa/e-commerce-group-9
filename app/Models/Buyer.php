@@ -19,4 +19,19 @@ class Buyer extends Model
     {
         return $this->belongsTo(User::class);
     }
+
+    public function transactions()
+    {
+        return $this->hasMany(Transaction::class, 'buyer_id', 'id');
+    }
+
+    public function getNameAttribute()
+    {
+        return $this->user->name ?? 'Guest';
+    }
+
+    public function getEmailAttribute()
+    {
+        return $this->user->email ?? '-';
+    }
 }
