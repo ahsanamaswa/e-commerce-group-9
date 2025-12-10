@@ -4,7 +4,6 @@
 
 @section('content')
 <div class="space-y-6">
-    <!-- Header -->
     <div class="flex items-center justify-between">
         <div>
             <a href="{{ route('admin.stores.index') }}" 
@@ -45,7 +44,6 @@
         </div>
     </div>
 
-    <!-- Stats Cards -->
     <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
         <div class="bg-zinc-900 rounded-xl p-6 border border-zinc-800">
             <div class="flex items-center justify-between">
@@ -105,7 +103,6 @@
     </div>
 
     <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
-        <!-- Store Information -->
         <div class="lg:col-span-2 space-y-6">
             <div class="bg-zinc-900 rounded-xl p-6 border border-zinc-800">
                 <h2 class="text-xl font-bold text-white mb-4">Informasi Toko</h2>
@@ -155,7 +152,6 @@
                 </div>
             </div>
 
-            <!-- Products -->
             <div class="bg-zinc-900 rounded-xl p-6 border border-zinc-800">
                 <h2 class="text-xl font-bold text-white mb-4">Produk Toko</h2>
                 
@@ -190,7 +186,6 @@
                 @endif
             </div>
 
-            <!-- Recent Transactions -->
             <div class="bg-zinc-900 rounded-xl p-6 border border-zinc-800">
                 <h2 class="text-xl font-bold text-white mb-4">Transaksi Terbaru</h2>
                 
@@ -235,9 +230,7 @@
             </div>
         </div>
 
-        <!-- Sidebar -->
         <div class="space-y-6">
-            <!-- Owner Info -->
             <div class="bg-zinc-900 rounded-xl p-6 border border-zinc-800">
                 <h2 class="text-xl font-bold text-white mb-4">Pemilik Toko</h2>
                 
@@ -269,7 +262,6 @@
                 </a>
             </div>
 
-            <!-- Actions -->
             <div class="bg-zinc-900 rounded-xl p-6 border border-zinc-800">
                 <h2 class="text-xl font-bold text-white mb-4">Aksi</h2>
                 

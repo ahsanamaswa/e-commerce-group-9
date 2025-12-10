@@ -5,7 +5,6 @@
 @section('content')
 <div class="min-h-screen bg-tumbloo-dark py-12 px-4 sm:px-6 lg:px-8">
     <div class="max-w-md mx-auto">
-        <!-- Header -->
         <div class="text-center mb-8">
             <h2 class="text-3xl font-bold text-tumbloo-white">Masuk ke Akun Anda</h2>
             <p class="mt-2 text-sm text-tumbloo-gray">
@@ -16,9 +15,7 @@
             </p>
         </div>
 
-        <!-- Login Form -->
         <div class="bg-tumbloo-black rounded-lg shadow-xl p-8 border border-tumbloo-accent">
-            <!-- Session Status -->
             @if (session('status'))
                 <div class="mb-4 p-4 bg-green-900/50 border border-green-500 rounded-lg text-green-200 text-sm">
                     {{ session('status') }}
@@ -28,7 +25,6 @@
             <form method="POST" action="{{ route('login') }}">
                 @csrf
 
-                <!-- Email Address -->
                 <div class="mb-6">
                     <label for="email" class="block text-sm font-medium text-tumbloo-white mb-2">
                         Email
@@ -49,7 +45,6 @@
                     @enderror
                 </div>
 
-                <!-- Password -->
                 <div class="mb-6">
                     <label for="password" class="block text-sm font-medium text-tumbloo-white mb-2">
                         Password
@@ -68,7 +63,6 @@
                     @enderror
                 </div>
 
-                <!-- Remember Me & Forgot Password -->
                 <div class="flex items-center justify-between mb-6">
                     <label class="flex items-center">
                         <input 
@@ -86,7 +80,6 @@
                     @endif
                 </div>
 
-                <!-- Submit Button -->
                 <button 
                     type="submit"
                     class="w-full bg-tumbloo-accent hover:bg-tumbloo-accent-light text-white font-semibold py-3 px-4 rounded-lg transition duration-200 transform hover:scale-105"
@@ -95,7 +88,6 @@
                 </button>
             </form>
 
-            <!-- Divider -->
             <div class="relative my-6">
                 <div class="absolute inset-0 flex items-center">
                     <div class="w-full border-t border-tumbloo-accent"></div>
@@ -105,7 +97,6 @@
                 </div>
             </div>
 
-            <!-- Social Login (Optional) -->
             <div class="space-y-3">
                 <button class="w-full bg-tumbloo-dark hover:bg-tumbloo-accent/20 text-tumbloo-white font-medium py-3 px-4 rounded-lg border border-tumbloo-accent transition duration-200 flex items-center justify-center">
                     <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 24 24">
@@ -119,7 +110,6 @@
             </div>
         </div>
 
-        <!-- Additional Info -->
         <p class="mt-8 text-center text-xs text-tumbloo-gray">
             Dengan masuk, Anda menyetujui
             <a href="{{ route('terms') }}" class="text-tumbloo-white hover:text-tumbloo-accent-light">Syarat & Ketentuan</a>

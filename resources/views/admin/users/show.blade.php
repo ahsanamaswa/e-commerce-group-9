@@ -4,7 +4,6 @@
 
 @section('content')
 <div class="space-y-6">
-    <!-- Header -->
     <div class="flex items-center justify-between">
         <div>
             <a href="{{ route('admin.users.index') }}" 
@@ -35,9 +34,7 @@
     </div>
 
     <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
-        <!-- Main Content -->
         <div class="lg:col-span-2 space-y-6">
-            <!-- User Information -->
             <div class="bg-zinc-900 rounded-xl p-6 border border-zinc-800">
                 <h2 class="text-xl font-bold text-white mb-4">Informasi User</h2>
                 
@@ -84,7 +81,6 @@
                 </div>
             </div>
 
-            <!-- Store Information (if seller) -->
             @if($user->store)
             <div class="bg-zinc-900 rounded-xl p-6 border border-zinc-800">
                 <h2 class="text-xl font-bold text-white mb-4">Informasi Toko</h2>
@@ -118,7 +114,6 @@
             </div>
             @endif
 
-            <!-- Buyer Information -->
             @if($user->buyer)
             <div class="bg-zinc-900 rounded-xl p-6 border border-zinc-800">
                 <h2 class="text-xl font-bold text-white mb-4">Informasi Pembeli</h2>
@@ -155,7 +150,6 @@
             </div>
             @endif
 
-            <!-- Transaction History -->
             <div class="bg-zinc-900 rounded-xl p-6 border border-zinc-800">
                 <h2 class="text-xl font-bold text-white mb-4">Riwayat Transaksi</h2>
                 
@@ -205,9 +199,7 @@
             </div>
         </div>
 
-        <!-- Sidebar -->
         <div class="space-y-6">
-            <!-- Quick Stats -->
             <div class="bg-zinc-900 rounded-xl p-6 border border-zinc-800">
                 <h2 class="text-xl font-bold text-white mb-4">Statistik</h2>
                 
@@ -242,7 +234,6 @@
                 </div>
             </div>
 
-            <!-- Actions -->
             <div class="bg-zinc-900 rounded-xl p-6 border border-zinc-800">
                 <h2 class="text-xl font-bold text-white mb-4">Aksi</h2>
                 

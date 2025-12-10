@@ -4,13 +4,11 @@
 
 @section('content')
 <div class="space-y-6">
-    <!-- Header -->
     <div>
         <h1 class="text-3xl font-bold text-white">Kelola User</h1>
         <p class="text-gray-400 mt-1">Kelola semua pengguna yang terdaftar di platform</p>
     </div>
 
-    <!-- Filters -->
     <div class="bg-zinc-900 rounded-xl p-6 border border-zinc-800">
         <form method="GET" action="{{ route('admin.users.index') }}" class="flex flex-col md:flex-row gap-4">
             <div class="flex-1">
@@ -40,7 +38,6 @@
         </form>
     </div>
 
-    <!-- Stats -->
     <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
         <div class="bg-zinc-900 rounded-xl p-4 border border-zinc-800">
             <div class="flex items-center justify-between">
@@ -57,7 +54,6 @@
         </div>
     </div>
 
-    <!-- Users List -->
     @if($users->count() > 0)
     <div class="bg-zinc-900 rounded-xl border border-zinc-800 overflow-hidden">
         <div class="overflow-x-auto">
@@ -139,12 +135,10 @@
         </div>
     </div>
 
-    <!-- Pagination -->
     <div class="mt-6">
         {{ $users->links() }}
     </div>
     @else
-    <!-- Empty State -->
     <div class="bg-zinc-900 rounded-xl p-12 text-center border border-zinc-800">
         <div class="flex justify-center mb-4">
             <div class="bg-zinc-800 p-6 rounded-full">

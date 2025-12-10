@@ -8,7 +8,6 @@
         <img src="{{ asset('images/background.png') }}" alt="Background" class="w-full h-full object-cover opacity-30">
     </div>
     
-    <!-- Content - Tombol tetap bisa diklik -->
     <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
         <div class="text-center">
             <h1 class="text-5xl font-bold text-tumbloo-black mb-6">

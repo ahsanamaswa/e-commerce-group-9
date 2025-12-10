@@ -2,7 +2,6 @@
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
 
-            <!-- Kolom 1: Brand -->
             <div class="md:col-span-1">
                 <img src="{{ asset('images/logo.png') }}" alt="Tumbloo" class="h-10 w-auto mb-4 brightness-0 invert">
                 <p class="text-sm text-tumbloo-gray-light mb-4">
@@ -32,7 +31,6 @@
                 </div>
             </div>
 
-            <!-- Kolom 2: Platform -->
             <div>
                 <h4 class="text-sm font-semibold text-tumbloo-white uppercase tracking-wider mb-4">Platform</h4>
                 <ul class="space-y-3">
@@ -45,7 +43,6 @@
                 </ul>
             </div>
 
-            <!-- Kolom 3: Bantuan -->
             <div>
                 <h4 class="text-sm font-semibold text-tumbloo-white uppercase tracking-wider mb-4">Bantuan</h4>
                 <ul class="space-y-3">
@@ -62,7 +59,6 @@
                 </ul>
             </div>
 
-            <!-- Kolom 4: Legal -->
             <div>
                 <h4 class="text-sm font-semibold text-tumbloo-white uppercase tracking-wider mb-4">Legal</h4>
                 <ul class="space-y-3">
@@ -78,7 +74,6 @@
             </div>
         </div>
 
-        <!-- Bottom Footer -->
         <div class="pt-8 mt-8 border-t border-tumbloo-black">
             <div class="flex flex-col md:flex-row justify-between items-center">
                 <p class="text-sm text-tumbloo-gray-dark">

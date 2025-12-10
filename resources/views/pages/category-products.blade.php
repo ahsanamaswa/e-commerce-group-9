@@ -3,11 +3,9 @@
 @section('title', $category->name . ' - Tumbloo')
 
 @section('content')
-<!-- Hero Section -->
 <div class="relative border-b border-tumbloo-accent w-full bg-tumbloo-black">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         
-        <!-- Breadcrumb -->
         <nav class="mb-6">
             <ol class="flex items-center gap-2 text-sm text-tumbloo-gray">
                 <li><a href="{{ route('dashboard') }}" class="hover:text-tumbloo-accent">Home</a></li>
@@ -19,7 +17,6 @@
         </nav>
 
         <div class="flex items-center gap-6">
-            <!-- Category Image -->
             @if($category->image)
                 <div class="w-24 h-24 rounded-xl overflow-hidden bg-tumbloo-dark border-2 border-tumbloo-accent flex-shrink-0">
                     <img src="{{ asset($category->image) }}" alt="{{ $category->name }}" class="w-full h-full object-cover">
@@ -44,7 +41,6 @@
     </div>
 </div>
 
-<!-- Category Filter -->
 <div class="bg-tumbloo-dark border-b border-tumbloo-accent">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
         <div class="flex items-center gap-4 overflow-x-auto">
@@ -62,7 +58,6 @@
     </div>
 </div>
 
-<!-- Products Grid -->
 <div class="bg-tumbloo-dark min-h-screen py-12">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         @if($products->isEmpty())
@@ -82,7 +77,6 @@
                 @foreach($products as $product)
                     <a href="{{ route('product.show', $product->id) }}" class="group">
                         <div class="bg-tumbloo-black rounded-lg overflow-hidden border border-tumbloo-accent hover:border-tumbloo-accent-light transition-all duration-300 transform hover:-translate-y-1">
-                            <!-- Product Image -->
                             <div class="relative aspect-square overflow-hidden bg-tumbloo-dark">
                                 @if($product->images->isNotEmpty())
                                     <img src="{{ asset($product->images->first()->image) }}"  
@@ -96,20 +90,17 @@
                                     </div>
                                 @endif
                                 
-                                <!-- Stock Badge -->
                                 @if($product->stock < 5)
                                     <div class="absolute top-2 left-2 px-2 py-1 bg-red-500 text-white text-xs font-semibold rounded">
                                         Stok Terbatas
                                     </div>
                                 @endif
 
-                                <!-- Condition Badge -->
                                 <div class="absolute top-2 right-2 px-2 py-1 rounded text-xs font-semibold {{ $product->condition == 'new' ? 'bg-green-500 text-white' : 'bg-yellow-500 text-white' }}">
                                     {{ $product->condition == 'new' ? 'Baru' : 'Bekas' }}
                                 </div>
                             </div>
 
-                            <!-- Product Info -->
                             <div class="p-4">
                                 <div class="text-xs text-tumbloo-gray mb-1">{{ $product->store->name }}</div>
                                 <h3 class="text-tumbloo-white font-semibold mb-2 line-clamp-2 group-hover:text-tumbloo-accent transition">
@@ -139,7 +130,6 @@
                 @endforeach
             </div>
 
-            <!-- Pagination -->
             <div class="mt-12">
                 {{ $products->links() }}
             </div>

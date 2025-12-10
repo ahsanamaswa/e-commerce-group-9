@@ -5,7 +5,6 @@
 @section('content')
 <div class="min-h-screen bg-tumbloo-dark py-12 px-4 sm:px-6 lg:px-8">
     <div class="max-w-md mx-auto">
-        <!-- Header -->
         <div class="text-center mb-8">
             <div class="inline-flex items-center justify-center w-16 h-16 bg-tumbloo-accent/20 rounded-full mb-4">
                 <svg class="w-8 h-8 text-tumbloo-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -18,9 +17,7 @@
             </p>
         </div>
 
-        <!-- Verification Card -->
         <div class="bg-tumbloo-black rounded-lg shadow-xl p-8 border border-tumbloo-accent">
-            <!-- Success Status -->
             @if (session('status') == 'verification-link-sent')
                 <div class="mb-6 p-4 bg-green-900/50 border border-green-500 rounded-lg">
                     <div class="flex items-start">
@@ -34,7 +31,6 @@
                 </div>
             @endif
 
-            <!-- Email Info -->
             <div class="mb-6 p-4 bg-tumbloo-dark rounded-lg border border-tumbloo-accent/30">
                 <div class="flex items-center">
                     <div class="flex-shrink-0">
@@ -49,7 +45,6 @@
                 </div>
             </div>
 
-            <!-- Instructions -->
             <div class="mb-6">
                 <h3 class="text-sm font-medium text-tumbloo-white mb-3">Langkah verifikasi:</h3>
                 <ol class="space-y-2 text-sm text-tumbloo-gray">
@@ -68,7 +63,6 @@
                 </ol>
             </div>
 
-            <!-- Resend Form -->
             <form method="POST" action="{{ route('verification.send') }}">
                 @csrf
                 <button 
@@ -79,7 +73,6 @@
                 </button>
             </form>
 
-            <!-- Logout -->
             <form method="POST" action="{{ route('logout') }}" class="mt-4">
                 @csrf
                 <button 
@@ -91,7 +84,6 @@
             </form>
         </div>
 
-        <!-- Help Info -->
         <div class="mt-8 bg-tumbloo-black/50 border border-tumbloo-accent/30 rounded-lg p-4">
             <div class="flex items-start">
                 <svg class="w-5 h-5 text-tumbloo-accent mt-0.5 mr-3 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">

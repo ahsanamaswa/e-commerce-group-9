@@ -5,7 +5,6 @@
 @section('content')
 <div class="min-h-screen bg-tumbloo-dark py-12 px-4 sm:px-6 lg:px-8">
     <div class="max-w-md mx-auto">
-        <!-- Header -->
         <div class="text-center mb-8">
             <div class="inline-flex items-center justify-center w-16 h-16 bg-tumbloo-accent/20 rounded-full mb-4">
                 <svg class="w-8 h-8 text-tumbloo-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -18,12 +17,10 @@
             </p>
         </div>
 
-        <!-- Confirm Password Form -->
         <div class="bg-tumbloo-black rounded-lg shadow-xl p-8 border border-tumbloo-accent">
             <form method="POST" action="{{ route('password.confirm') }}">
                 @csrf
 
-                <!-- Password -->
                 <div class="mb-6">
                     <label for="password" class="block text-sm font-medium text-tumbloo-white mb-2">
                         Password
@@ -43,7 +40,6 @@
                     @enderror
                 </div>
 
-                <!-- Submit Button -->
                 <button 
                     type="submit"
                     class="w-full bg-tumbloo-accent hover:bg-tumbloo-accent-light text-white font-semibold py-3 px-4 rounded-lg transition duration-200 transform hover:scale-105"
@@ -53,7 +49,6 @@
             </form>
         </div>
 
-        <!-- Security Info -->
         <div class="mt-8 bg-tumbloo-black/50 border border-tumbloo-accent/30 rounded-lg p-4">
             <div class="flex items-start">
                 <svg class="w-5 h-5 text-tumbloo-accent mt-0.5 mr-3 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">

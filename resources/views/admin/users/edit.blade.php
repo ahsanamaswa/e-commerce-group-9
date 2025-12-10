@@ -4,7 +4,6 @@
 
 @section('content')
 <div class="space-y-6">
-    <!-- Header -->
     <div>
         <a href="{{ route('admin.users.show', $user->id) }}" 
             class="text-sm text-gray-400 hover:text-white inline-flex items-center mb-2 transition-colors">
@@ -18,7 +17,6 @@
     </div>
 
     <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
-        <!-- Form -->
         <div class="lg:col-span-2">
             <div class="bg-zinc-900 rounded-xl p-6 border border-zinc-800">
                 <form action="{{ route('admin.users.update', $user->id) }}" method="POST">
@@ -26,7 +24,6 @@
                     @method('PUT')
 
                     <div class="space-y-6">
-                        <!-- Name -->
                         <div>
                             <label for="name" class="text-sm font-medium text-gray-300 block mb-2">
                                 Nama Lengkap <span class="text-red-400">*</span>
@@ -38,7 +35,6 @@
                             @enderror
                         </div>
 
-                        <!-- Email -->
                         <div>
                             <label for="email" class="text-sm font-medium text-gray-300 block mb-2">
                                 Email <span class="text-red-400">*</span>
@@ -50,7 +46,6 @@
                             @enderror
                         </div>
 
-                        <!-- Role -->
                         <div>
                             <label for="role" class="text-sm font-medium text-gray-300 block mb-2">
                                 Role <span class="text-red-400">*</span>
@@ -70,13 +65,11 @@
 
                         <div class="border-t border-zinc-800 my-6"></div>
 
-                        <!-- Password Section -->
                         <div class="bg-zinc-800/50 p-4 rounded-lg border border-zinc-700">
                             <h3 class="font-semibold text-white mb-3">Ubah Password (Opsional)</h3>
                             <p class="text-sm text-gray-400 mb-4">Biarkan kosong jika tidak ingin mengubah password</p>
 
                             <div class="space-y-4">
-                                <!-- New Password -->
                                 <div>
                                     <label for="password" class="text-sm font-medium text-gray-300 block mb-2">Password Baru</label>
                                     <input type="password" id="password" name="password" 
@@ -86,7 +79,6 @@
                                     @enderror
                                 </div>
 
-                                <!-- Confirm Password -->
                                 <div>
                                     <label for="password_confirmation" class="text-sm font-medium text-gray-300 block mb-2">Konfirmasi Password Baru</label>
                                     <input type="password" id="password_confirmation" name="password_confirmation" 
@@ -95,7 +87,6 @@
                             </div>
                         </div>
 
-                        <!-- Submit Buttons -->
                         <div class="flex items-center space-x-4 pt-4">
                             <button type="submit" class="px-6 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg font-medium transition-colors">
                                 <svg class="h-5 w-5 mr-2 inline" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -112,9 +103,7 @@
             </div>
         </div>
 
-        <!-- Sidebar -->
         <div class="space-y-6">
-            <!-- Current Info -->
             <div class="bg-zinc-900 rounded-xl p-6 border border-zinc-800">
                 <h2 class="text-xl font-bold text-white mb-4">Informasi Saat Ini</h2>
                 
@@ -156,7 +145,6 @@
                 </div>
             </div>
 
-            <!-- Warning Card -->
             <div class="bg-zinc-900 rounded-xl p-6 border-2 border-yellow-500/30">
                 <div class="flex items-start space-x-3">
                     <svg class="h-6 w-6 text-yellow-500 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -174,7 +162,6 @@
                 </div>
             </div>
 
-            <!-- Danger Zone -->
             @if($user->role != 'admin')
             <div class="bg-zinc-900 rounded-xl p-6 border-2 border-red-500/30">
                 <h3 class="font-semibold text-red-400 mb-3">Danger Zone</h3>

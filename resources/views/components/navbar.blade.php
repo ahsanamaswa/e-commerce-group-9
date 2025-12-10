@@ -2,14 +2,12 @@
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="flex justify-between h-16">
             <div class="flex items-center">
-                <!-- Logo -->
                 <div class="flex-shrink-0">
                     <a href="{{ route('home') }}" class="flex items-center space-x-2">
                         <img src="{{ asset('images/logo.png') }}" alt="Tumbloo" class="h-8 w-auto">
                     </a>
                 </div>
 
-                <!-- Menu Desktop -->
                 <div class="hidden md:ml-10 md:flex md:space-x-8">
                     <a href="{{ route('home') }}"
                         class="{{ request()->routeIs('home') ? 'text-tumbloo-white' : 'text-tumbloo-gray hover:text-tumbloo-white' }} px-3 py-2 text-sm font-medium transition">
@@ -26,7 +24,6 @@
                 </div>
             </div>
 
-            <!-- Right Side Buttons -->
             <div class="hidden md:flex md:items-center md:space-x-4">
                 @guest
                     <a href="{{ route('login') }}"
@@ -38,7 +35,6 @@
                         Daftar Sekarang
                     </a>
                 @else
-                    <!-- Cart Link -->
                     <a href="{{ route('cart.index') }}" 
                        class="relative flex items-center space-x-1 {{ request()->routeIs('cart.*') ? 'text-tumbloo-white' : 'text-tumbloo-gray hover:text-tumbloo-white' }} px-3 py-2 text-sm font-medium transition group">
                         <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -91,7 +87,6 @@
                         </a>
                     @endif
                     
-                    <!-- Profile Dropdown -->
                     <div class="relative" x-data="{ open: false }">
                         <button @click="open = !open" @click.away="open = false"
                             class="flex items-center space-x-2 text-tumbloo-white hover:text-tumbloo-gray-light focus:outline-none transition">
@@ -145,7 +140,6 @@
                 @endguest
             </div>
 
-            <!-- Mobile menu button -->
             <div class="flex items-center md:hidden">
                 <button id="mobile-menu-btn" class="text-tumbloo-gray hover:text-tumbloo-white p-2">
                     <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -157,7 +151,6 @@
         </div>
     </div>
 
-    <!-- Mobile Menu -->
     <div id="mobile-menu" class="hidden md:hidden bg-tumbloo-dark border-t border-tumbloo-accent">
         <div class="px-2 pt-2 pb-3 space-y-1">
             <a href="{{ route('home') }}"
@@ -186,7 +179,6 @@
                 </div>
             @else
                 <div class="pt-2 border-t border-tumbloo-accent">
-                    <!-- Cart Link Mobile -->
                     <a href="{{ route('cart.index') }}"
                         class="flex items-center justify-between text-tumbloo-gray hover:bg-tumbloo-accent hover:text-tumbloo-white px-3 py-2 rounded-md text-base font-medium transition">
                         <div class="flex items-center space-x-2">

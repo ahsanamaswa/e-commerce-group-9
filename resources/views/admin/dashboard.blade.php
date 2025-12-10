@@ -4,7 +4,6 @@
 
 @section('content')
 <div class="space-y-6">
-    <!-- Header -->
     <div class="flex items-center justify-between">
         <div>
             <h1 class="text-3xl font-bold text-white">Dashboard Admin</h1>
@@ -15,9 +14,7 @@
         </div>
     </div>
 
-    <!-- Stats Cards -->
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        <!-- Total Users -->
         <div class="bg-zinc-900 rounded-xl p-6 border border-zinc-800">
             <div class="flex items-center justify-between">
                 <div>
@@ -32,7 +29,6 @@
             </div>
         </div>
 
-        <!-- Total Stores -->
         <div class="bg-zinc-900 rounded-xl p-6 border border-zinc-800">
             <div class="flex items-center justify-between">
                 <div>
@@ -47,7 +43,6 @@
             </div>
         </div>
 
-        <!-- Pending Stores -->
         <div class="bg-zinc-900 rounded-xl p-6 border border-zinc-800">
             <div class="flex items-center justify-between">
                 <div>
@@ -67,7 +62,6 @@
             @endif
         </div>
 
-        <!-- Total Products -->
         <div class="bg-zinc-900 rounded-xl p-6 border border-zinc-800">
             <div class="flex items-center justify-between">
                 <div>
@@ -82,7 +76,6 @@
             </div>
         </div>
 
-        <!-- Total Transactions -->
         <div class="bg-zinc-900 rounded-xl p-6 border border-zinc-800">
             <div class="flex items-center justify-between">
                 <div>
@@ -97,7 +90,6 @@
             </div>
         </div>
 
-        <!-- Total Revenue -->
         <div class="bg-zinc-900 rounded-xl p-6 border border-zinc-800">
             <div class="flex items-center justify-between">
                 <div>
@@ -113,9 +105,7 @@
         </div>
     </div>
 
-    <!-- Recent Data -->
     <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
-        <!-- Recent Users -->
         <div class="bg-zinc-900 rounded-xl p-6 border border-zinc-800">
             <div class="flex items-center justify-between mb-4">
                 <h2 class="text-xl font-bold text-white">User Terbaru</h2>
@@ -143,7 +133,6 @@
             </div>
         </div>
 
-        <!-- Recent Stores -->
         <div class="bg-zinc-900 rounded-xl p-6 border border-zinc-800">
             <div class="flex items-center justify-between mb-4">
                 <h2 class="text-xl font-bold text-white">Toko Terbaru</h2>
@@ -180,7 +169,6 @@
         </div>
     </div>
 
-    <!-- Recent Transactions -->
     <div class="bg-zinc-900 rounded-xl p-6 border border-zinc-800">
         <div class="flex items-center justify-between mb-4">
             <h2 class="text-xl font-bold text-white">Transaksi Terbaru</h2>

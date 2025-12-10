@@ -3,16 +3,13 @@
 @section('title', 'Marketplace - Tumbloo')
 
 @section('content')
-<!-- Hero Section -->
 <div class="relative border-b border-tumbloo-accent w-full">
     
-    <!-- Background (punya opacity sendiri) -->
     <div 
         class="absolute inset-0 bg-cover bg-center bg-no-repeat opacity-30"
         style="background-image: url('{{ asset('images/background.png') }}');">
     </div>
 
-    <!-- Overlay isi (tidak transparan) -->
     <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
         <div class="text-center">
             <h1 class="text-4xl md:text-5xl font-bold text-tumbloo-black mb-4">
@@ -22,7 +19,6 @@
                 Marketplace terpercaya untuk membeli dan menjual tumbler terbaik
             </p>
 
-            <!-- Stats -->
             <div class="flex justify-center gap-8 mt-8">
                 <div class="text-center">
                     <div class="text-3xl font-bold text-tumbloo-accent">{{ $categories->count() }}</div>
@@ -37,7 +33,6 @@
     </div>
 </div>
 
-<!-- Categories Section -->
 <div class="bg-tumbloo-dark min-h-screen py-12">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
@@ -60,7 +55,6 @@
                     <a href="{{ route('category.show', $category->slug) }}" class="group">
                         <div class="bg-tumbloo-black rounded-xl overflow-hidden border border-tumbloo-accent hover:border-tumbloo-accent-light transition-all duration-300 transform hover:-translate-y-2 hover:shadow-2xl hover:shadow-tumbloo-accent/20">
                             
-                            <!-- Category Image -->
                             <div class="relative aspect-square overflow-hidden bg-gradient-to-br from-tumbloo-dark to-tumbloo-black">
                                 @if($category->image && file_exists(public_path($category->image)))
                                     <img src="{{ asset($category->image) }}" 
@@ -78,11 +72,9 @@
                                     </div>
                                 @endif
                                 
-                                <!-- Overlay Gradient -->
                                 <div class="absolute inset-0 bg-gradient-to-t from-tumbloo-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                             </div>
 
-                            <!-- Category Info -->
                             <div class="p-6">
                                 <h3 class="text-xl font-bold text-tumbloo-white mb-2 group-hover:text-tumbloo-accent transition">
                                     {{ $category->name }}
@@ -124,7 +116,6 @@
             </div>
         @endif
 
-        <!-- CTA Section -->
         <div class="mt-16 bg-gradient-to-r from-tumbloo-accent to-tumbloo-accent-light rounded-2xl p-8 text-center">
             <h3 class="text-2xl font-bold text-white mb-3">Tidak Menemukan Brand Favorit?</h3>
             <p class="text-white/80 mb-6 max-w-2xl mx-auto">

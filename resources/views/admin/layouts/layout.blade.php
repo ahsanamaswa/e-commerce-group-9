@@ -8,7 +8,6 @@
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 <body class="bg-tumbloo-accent">
-    <!-- Admin Navbar -->
     <nav class="bg-tumbloo-black shadow-lg sticky top-0 z-50 border-b border-tumbloo-dark">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between h-16">
@@ -77,7 +76,6 @@
             </div>
         </div>
 
-        <!-- Mobile Menu -->
         <div id="mobile-menu" class="hidden md:hidden bg-tumbloo-dark border-t border-tumbloo-accent">
             <div class="px-2 pt-2 pb-3 space-y-1">
                 <a href="{{ route('admin.dashboard') }}" class="block text-tumbloo-white hover:bg-tumbloo-accent px-3 py-2 rounded-md text-base font-medium transition">
@@ -110,7 +108,6 @@
         </div>
     </nav>
 
-    <!-- Flash Messages -->
     @if(session('success'))
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-4">
         <div class="alert alert-success fade-in">
@@ -137,7 +134,6 @@
     </div>
     @endif
 
-    <!-- Main Content -->
     <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         @yield('content')
     </main>

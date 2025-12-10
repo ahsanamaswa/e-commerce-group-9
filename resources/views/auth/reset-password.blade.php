@@ -5,7 +5,6 @@
 @section('content')
 <div class="min-h-screen bg-tumbloo-dark py-12 px-4 sm:px-6 lg:px-8">
     <div class="max-w-md mx-auto">
-        <!-- Header -->
         <div class="text-center mb-8">
             <div class="inline-flex items-center justify-center w-16 h-16 bg-tumbloo-accent/20 rounded-full mb-4">
                 <svg class="w-8 h-8 text-tumbloo-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -18,15 +17,12 @@
             </p>
         </div>
 
-        <!-- Reset Password Form -->
         <div class="bg-tumbloo-black rounded-lg shadow-xl p-8 border border-tumbloo-accent">
             <form method="POST" action="{{ route('password.store') }}">
                 @csrf
 
-                <!-- Password Reset Token -->
                 <input type="hidden" name="token" value="{{ $request->route('token') }}">
 
-                <!-- Email Address -->
                 <div class="mb-6">
                     <label for="email" class="block text-sm font-medium text-tumbloo-white mb-2">
                         Email
@@ -47,7 +43,6 @@
                     @enderror
                 </div>
 
-                <!-- Password -->
                 <div class="mb-6">
                     <label for="password" class="block text-sm font-medium text-tumbloo-white mb-2">
                         Password Baru
@@ -69,7 +64,6 @@
                     </p>
                 </div>
 
-                <!-- Confirm Password -->
                 <div class="mb-6">
                     <label for="password_confirmation" class="block text-sm font-medium text-tumbloo-white mb-2">
                         Konfirmasi Password Baru
@@ -85,7 +79,6 @@
                     >
                 </div>
 
-                <!-- Submit Button -->
                 <button 
                     type="submit"
                     class="w-full bg-tumbloo-accent hover:bg-tumbloo-accent-light text-white font-semibold py-3 px-4 rounded-lg transition duration-200 transform hover:scale-105"
@@ -95,7 +88,6 @@
             </form>
         </div>
 
-        <!-- Security Tips -->
         <div class="mt-8 bg-tumbloo-black/50 border border-tumbloo-accent/30 rounded-lg p-4">
             <h4 class="text-sm font-medium text-tumbloo-white mb-3">Tips Keamanan Password:</h4>
             <ul class="space-y-2 text-xs text-tumbloo-gray">

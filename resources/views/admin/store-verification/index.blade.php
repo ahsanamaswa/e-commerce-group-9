@@ -4,13 +4,11 @@
 
 @section('content')
 <div class="space-y-6">
-    <!-- Header -->
     <div>
         <h1 class="text-3xl font-bold text-white">Verifikasi Toko</h1>
         <p class="text-gray-400 mt-1">Tinjau dan verifikasi pendaftaran toko baru</p>
     </div>
 
-    <!-- Stats -->
     <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
         <div class="bg-zinc-900 rounded-xl p-6 border border-zinc-800">
             <div class="flex items-center justify-between">
@@ -27,7 +25,6 @@
         </div>
     </div>
 
-    <!-- Pending Stores List -->
     @if($pendingStores->count() > 0)
     <div class="space-y-4">
         @foreach($pendingStores as $store)
@@ -97,12 +94,10 @@
         @endforeach
     </div>
 
-    <!-- Pagination -->
     <div class="mt-6">
         {{ $pendingStores->links() }}
     </div>
     @else
-    <!-- Empty State -->
     <div class="bg-zinc-900 rounded-xl p-12 text-center border border-zinc-800">
         <div class="flex justify-center mb-4">
             <div class="bg-zinc-800 p-6 rounded-full">

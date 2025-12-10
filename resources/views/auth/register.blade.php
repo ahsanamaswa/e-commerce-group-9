@@ -5,7 +5,6 @@
 @section('content')
 <div class="min-h-screen bg-tumbloo-dark py-12 px-4 sm:px-6 lg:px-8">
     <div class="max-w-md mx-auto">
-        <!-- Header -->
         <div class="text-center mb-8">
             <h2 class="text-3xl font-bold text-tumbloo-white">Buat Akun Baru</h2>
             <p class="mt-2 text-sm text-tumbloo-gray">
@@ -16,12 +15,10 @@
             </p>
         </div>
 
-        <!-- Register Form -->
         <div class="bg-tumbloo-black rounded-lg shadow-xl p-8 border border-tumbloo-accent">
             <form method="POST" action="{{ route('register') }}">
                 @csrf
 
-                <!-- Name -->
                 <div class="mb-6">
                     <label for="name" class="block text-sm font-medium text-tumbloo-white mb-2">
                         Nama Lengkap
@@ -42,7 +39,6 @@
                     @enderror
                 </div>
 
-                <!-- Email Address -->
                 <div class="mb-6">
                     <label for="email" class="block text-sm font-medium text-tumbloo-white mb-2">
                         Email
@@ -62,7 +58,6 @@
                     @enderror
                 </div>
 
-                <!-- Password -->
                 <div class="mb-6">
                     <label for="password" class="block text-sm font-medium text-tumbloo-white mb-2">
                         Password
@@ -84,7 +79,6 @@
                     </p>
                 </div>
 
-                <!-- Confirm Password -->
                 <div class="mb-6">
                     <label for="password_confirmation" class="block text-sm font-medium text-tumbloo-white mb-2">
                         Konfirmasi Password
@@ -100,7 +94,6 @@
                     >
                 </div>
 
-                <!-- Terms Agreement -->
                 <div class="mb-6">
                     <label class="flex items-start">
                         <input 
@@ -118,7 +111,6 @@
                     </label>
                 </div>
 
-                <!-- Submit Button -->
                 <button 
                     type="submit"
                     class="w-full bg-tumbloo-accent hover:bg-tumbloo-accent-light text-white font-semibold py-3 px-4 rounded-lg transition duration-200 transform hover:scale-105"
@@ -127,7 +119,6 @@
                 </button>
             </form>
 
-            <!-- Divider -->
             <div class="relative my-6">
                 <div class="absolute inset-0 flex items-center">
                     <div class="w-full border-t border-tumbloo-accent"></div>
@@ -137,7 +128,6 @@
                 </div>
             </div>
 
-            <!-- Social Register (Optional) -->
             <div class="space-y-3">
                 <button class="w-full bg-tumbloo-dark hover:bg-tumbloo-accent/20 text-tumbloo-white font-medium py-3 px-4 rounded-lg border border-tumbloo-accent transition duration-200 flex items-center justify-center">
                     <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 24 24">
@@ -151,7 +141,6 @@
             </div>
         </div>
 
-        <!-- Security Info -->
         <div class="mt-8 bg-tumbloo-black/50 border border-tumbloo-accent/30 rounded-lg p-4">
             <div class="flex items-start">
                 <svg class="w-5 h-5 text-tumbloo-accent mt-0.5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">

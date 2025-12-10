@@ -5,7 +5,6 @@
 @section('content')
 <div class="min-h-screen bg-tumbloo-dark py-12 px-4 sm:px-6 lg:px-8">
     <div class="max-w-md mx-auto">
-        <!-- Header -->
         <div class="text-center mb-8">
             <div class="inline-flex items-center justify-center w-16 h-16 bg-tumbloo-accent/20 rounded-full mb-4">
                 <svg class="w-8 h-8 text-tumbloo-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -18,7 +17,6 @@
             </p>
         </div>
 
-        <!-- Forgot Password Form -->
         <div class="bg-tumbloo-black rounded-lg shadow-xl p-8 border border-tumbloo-accent">
             <!-- Session Status -->
             @if (session('status'))
@@ -30,7 +28,6 @@
             <form method="POST" action="{{ route('password.email') }}">
                 @csrf
 
-                <!-- Email Address -->
                 <div class="mb-6">
                     <label for="email" class="block text-sm font-medium text-tumbloo-white mb-2">
                         Email
@@ -50,7 +47,6 @@
                     @enderror
                 </div>
 
-                <!-- Submit Button -->
                 <button 
                     type="submit"
                     class="w-full bg-tumbloo-accent hover:bg-tumbloo-accent-light text-white font-semibold py-3 px-4 rounded-lg transition duration-200 transform hover:scale-105"
@@ -59,7 +55,6 @@
                 </button>
             </form>
 
-            <!-- Back to Login -->
             <div class="mt-6 text-center">
                 <a href="{{ route('login') }}" class="text-sm text-tumbloo-accent hover:text-tumbloo-accent-light transition inline-flex items-center">
                     <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -70,7 +65,6 @@
             </div>
         </div>
 
-        <!-- Help Info -->
         <div class="mt-8 bg-tumbloo-black/50 border border-tumbloo-accent/30 rounded-lg p-4">
             <div class="flex items-start">
                 <svg class="w-5 h-5 text-tumbloo-accent mt-0.5 mr-3 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">

@@ -4,7 +4,6 @@
 
 @section('content')
 <div class="space-y-6">
-    <!-- Header -->
     <div class="flex items-center justify-between">
         <div>
             <a href="{{ route('admin.store-verification.index') }}" 
@@ -20,9 +19,7 @@
     </div>
 
     <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
-        <!-- Main Content -->
         <div class="lg:col-span-2 space-y-6">
-            <!-- Store Information -->
             <div class="bg-zinc-900 rounded-xl p-6 border border-zinc-800">
                 <h2 class="text-xl font-bold text-white mb-4">Informasi Toko</h2>
                 
@@ -64,7 +61,6 @@
                 </div>
             </div>
 
-            <!-- Owner Information -->
             <div class="bg-zinc-900 rounded-xl p-6 border border-zinc-800">
                 <h2 class="text-xl font-bold text-white mb-4">Informasi Pemilik</h2>
                 
@@ -95,9 +91,7 @@
             </div>
         </div>
 
-        <!-- Sidebar Actions -->
         <div class="space-y-6">
-            <!-- Actions Card -->
             <div class="bg-zinc-900 rounded-xl p-6 border border-zinc-800">
                 <h2 class="text-xl font-bold text-white mb-4">Aksi Verifikasi</h2>
                 
@@ -129,7 +123,6 @@
                 </p>
             </div>
 
-            <!-- Stats Card -->
             <div class="bg-zinc-900 rounded-xl p-6 border border-zinc-800">
                 <h2 class="text-xl font-bold text-white mb-4">Statistik</h2>
                 
@@ -152,7 +145,6 @@
     </div>
 </div>
 
-<!-- Reject Modal -->
 <div id="reject-modal" class="hidden fixed inset-0 bg-black bg-opacity-75 z-50 flex items-center justify-center p-4">
     <div class="bg-zinc-900 border border-zinc-800 rounded-xl shadow-2xl max-w-md w-full p-6">
         <div class="flex items-center justify-between mb-4">
