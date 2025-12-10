@@ -8,7 +8,7 @@
             <a href="{{ route('store.orders.index') }}" class="text-tumbloo-gray hover:text-tumbloo-black mb-4 inline-block">
                 ← Kembali ke Pesanan
             </a>
-            <h1 class="text-3xl font-bold text-tumbloo-black mb-2">Detail Pesanan #{{ $order->id }}</h1>
+            <h1 class="text-3xl font-bold text-tumbloo-black mb-2">Detail Pesanan #{{ $order->code ?? $order->id }}</h1>
             <p class="text-tumbloo-gray">{{ $order->created_at->format('d M Y, H:i') }}</p>
         </div>
 
@@ -23,10 +23,10 @@
                 <div class="card p-6">
                     <h2 class="text-xl font-bold text-tumbloo-black mb-6">Produk</h2>
                     <div class="space-y-4">
-                        @foreach($order->details as $detail)
+                        @forelse($order->transactionDetails as $detail)
                         <div class="flex gap-4 pb-4 border-b border-tumbloo-gray-light last:border-0">
-                            @if($detail->product->images->first())
-                                <img src="{{ Storage::url($detail->product->images->first()->image) }}" 
+                            @if($detail->product && $detail->product->images && $detail->product->images->first())
+                                <img src="{{ asset('storage/' . $detail->product->images->first()->image) }}" 
                                     alt="{{ $detail->product->name }}"
                                     class="w-20 h-20 object-cover rounded-lg">
                             @else
@@ -37,14 +37,16 @@
                                 </div>
                             @endif
                             <div class="flex-1">
-                                <h3 class="font-semibold text-tumbloo-black">{{ $detail->product->name }}</h3>
-                                <p class="text-sm text-tumbloo-gray mt-1">{{ $detail->quantity }} x Rp {{ number_format($detail->price, 0, ',', '.') }}</p>
+                                <h3 class="font-semibold text-tumbloo-black">{{ $detail->product->name ?? 'Produk Tidak Ditemukan' }}</h3>
+                                <p class="text-sm text-tumbloo-gray mt-1">{{ $detail->qty }} x Rp {{ number_format($detail->subtotal / $detail->qty, 0, ',', '.') }}</p>
                                 <p class="text-sm font-semibold text-tumbloo-black mt-2">
-                                    Subtotal: Rp {{ number_format($detail->quantity * $detail->price, 0, ',', '.') }}
+                                    Subtotal: Rp {{ number_format($detail->subtotal, 0, ',', '.') }}
                                 </p>
                             </div>
                         </div>
-                        @endforeach
+                        @empty
+                        <p class="text-tumbloo-gray text-center py-4">Tidak ada produk dalam pesanan ini.</p>
+                        @endforelse
                     </div>
                 </div>
 
@@ -54,19 +56,19 @@
                     <div class="space-y-3 text-sm">
                         <div class="flex justify-between">
                             <span class="text-tumbloo-gray">Alamat:</span>
-                            <span class="font-semibold text-tumbloo-black text-right">{{ $order->address }}</span>
+                            <span class="font-semibold text-tumbloo-black text-right max-w-xs">{{ $order->address ?? '-' }}</span>
                         </div>
                         <div class="flex justify-between">
                             <span class="text-tumbloo-gray">Kota:</span>
-                            <span class="font-semibold text-tumbloo-black">{{ $order->city }}</span>
+                            <span class="font-semibold text-tumbloo-black">{{ $order->city ?? '-' }}</span>
                         </div>
                         <div class="flex justify-between">
                             <span class="text-tumbloo-gray">Kode Pos:</span>
-                            <span class="font-semibold text-tumbloo-black">{{ $order->postal_code }}</span>
+                            <span class="font-semibold text-tumbloo-black">{{ $order->postal_code ?? '-' }}</span>
                         </div>
                         <div class="flex justify-between">
-                            <span class="text-tumbloo-gray">No. Telepon:</span>
-                            <span class="font-semibold text-tumbloo-black">{{ $order->phone }}</span>
+                            <span class="text-tumbloo-gray">Jenis Pengiriman:</span>
+                            <span class="font-semibold text-tumbloo-black">{{ $order->shipping_type ?? '-' }}</span>
                         </div>
                         @if($order->tracking_number)
                         <div class="flex justify-between">
@@ -84,8 +86,8 @@
                 <div class="card p-6">
                     <h3 class="font-bold text-tumbloo-black mb-4">Pembeli</h3>
                     <div class="space-y-2 text-sm">
-                        <p class="font-semibold text-tumbloo-black">{{ $order->buyer->name }}</p>
-                        <p class="text-tumbloo-gray">{{ $order->buyer->email }}</p>
+                        <p class="font-semibold text-tumbloo-black">{{ $order->buyer->name ?? 'Nama Tidak Tersedia' }}</p>
+                        <p class="text-tumbloo-gray">{{ $order->buyer->email ?? '-' }}</p>
                     </div>
                 </div>
 
@@ -95,12 +97,18 @@
                     <div class="space-y-3 text-sm mb-4">
                         <div class="flex justify-between">
                             <span class="text-tumbloo-gray">Subtotal:</span>
-                            <span class="font-semibold">Rp {{ number_format($order->sub_total, 0, ',', '.') }}</span>
+                            <span class="font-semibold">Rp {{ number_format($order->transactionDetails->sum('subtotal'), 0, ',', '.') }}</span>
                         </div>
                         <div class="flex justify-between">
                             <span class="text-tumbloo-gray">Ongkir:</span>
-                            <span class="font-semibold">Rp {{ number_format($order->delivery_fee, 0, ',', '.') }}</span>
+                            <span class="font-semibold">Rp {{ number_format($order->shipping_cost ?? 0, 0, ',', '.') }}</span>
                         </div>
+                        @if($order->tax)
+                        <div class="flex justify-between">
+                            <span class="text-tumbloo-gray">Pajak:</span>
+                            <span class="font-semibold">Rp {{ number_format($order->tax, 0, ',', '.') }}</span>
+                        </div>
+                        @endif
                         <div class="divider"></div>
                         <div class="flex justify-between text-base">
                             <span class="font-bold text-tumbloo-black">Total:</span>
@@ -125,6 +133,7 @@
                     <h3 class="font-bold text-tumbloo-black mb-4">Update Status</h3>
                     <form action="{{ route('store.orders.update-status', $order->id) }}" method="POST" class="mb-4">
                         @csrf
+                        @method('PATCH')
                         <select name="status" class="select-field mb-3">
                             <option value="pending" {{ $order->payment_status == 'pending' ? 'selected' : '' }}>Pending</option>
                             <option value="processing" {{ $order->payment_status == 'processing' ? 'selected' : '' }}>Processing</option>
@@ -137,11 +146,12 @@
                 </div>
 
                 <!-- Add Tracking -->
-                @if(!$order->tracking_number && $order->payment_status == 'processing')
+                @if(!$order->tracking_number && in_array($order->payment_status, ['processing', 'pending']))
                 <div class="card p-6">
                     <h3 class="font-bold text-tumbloo-black mb-4">Tambah Tracking</h3>
                     <form action="{{ route('store.orders.update-tracking', $order->id) }}" method="POST">
                         @csrf
+                        @method('PATCH')
                         <input type="text" name="tracking_number" 
                             class="input-field mb-3" 
                             placeholder="Nomor Resi" required>
