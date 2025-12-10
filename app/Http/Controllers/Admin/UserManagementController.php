@@ -29,19 +29,19 @@ class UserManagementController extends Controller
 
         $users = $query->latest()->paginate(15);
 
-        return view('admin.user.index', compact('users'));
+        return view('admin.users.index', compact('users'));
     }
 
     public function show($id)
     {
         $user = User::with(['store', 'buyer', 'transactions'])->findOrFail($id);
-        return view('admin.user.show', compact('user'));
+        return view('admin.users.show', compact('user'));
     }
 
     public function edit($id)
     {
         $user = User::findOrFail($id);
-        return view('admin.user.edit', compact('user'));
+        return view('admin.users.edit', compact('user'));
     }
 
     public function update(Request $request, $id)
