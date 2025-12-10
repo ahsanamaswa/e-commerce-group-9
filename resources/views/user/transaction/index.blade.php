@@ -108,7 +108,7 @@
 
                             <!-- Actions -->
                             <div class="flex gap-3">
-                                <a href="{{ route('payment.show', $transaction->id) }}" 
+                                <a href="{{ route('payment.show', $transaction->code) }}" 
                                    class="flex-1 text-center bg-tumbloo-accent hover:bg-tumbloo-accent-light text-white font-semibold py-2 px-4 rounded-lg transition">
                                     Lihat Detail
                                 </a>
@@ -116,7 +116,6 @@
                                 @if($transaction->payment_status === 'pending')
                                     <form action="{{ route('transaction.cancel', $transaction->id) }}" method="POST" class="flex-1">
                                         @csrf
-                                        @method('PATCH')
                                         <button type="submit" 
                                                 onclick="return confirm('Yakin ingin membatalkan pesanan ini?')"
                                                 class="w-full bg-red-500 hover:bg-red-600 text-white font-semibold py-2 px-4 rounded-lg transition">
@@ -125,8 +124,8 @@
                                     </form>
                                 @endif
 
-                                @if($transaction->payment_status === 'delivered')
-                                    <a href="{{ route('reviews.create', ['transaction' => $transaction->id, 'product' => $transaction->transactionDetails->first()->product_id]) }}" 
+                                @if($transaction->payment_status === 'delivered' && $transaction->transactionDetails->isNotEmpty())
+                                    <a href="{{ route('reviews.create', [$transaction->id, $transaction->transactionDetails->first()->product_id]) }}" 
                                        class="flex-1 text-center bg-tumbloo-dark hover:bg-tumbloo-accent/20 text-tumbloo-white border border-tumbloo-accent font-semibold py-2 px-4 rounded-lg transition">
                                         Beri Ulasan
                                     </a>
